@@ -1,13 +1,13 @@
 jQuery(document).ready(function($) {
 
-	var field_names_wrap = $(".cf7hsfi_form_field_names_wrap");
-	var field_names_first = $(".cf7hsfi_form_field_names_wrap > .cf7hsfi_form_field_names.first_field");
-	var cf7_field = $('.cf7hsfi input.cf7-field');
-	var cf7_field_names = cf7hsfi_get_cf7_fields();
+	var field_names_wrap = $(".cf7tohs_form_field_names_wrap");
+	var field_names_first = $(".cf7tohs_form_field_names_wrap > .cf7tohs_form_field_names.first_field");
+	var cf7_field = $('.cf7tohs input.cf7-field');
+	var cf7_field_names = cf7tohs_get_cf7_fields();
 
-	if( cf7_field_names ) $('.cf7hsfi .cf7_field_names').html('Contact Form 7 Fields: ' + cf7_field_names);
+	if( cf7_field_names ) $('.cf7tohs .cf7_field_names').html('Contact Form 7 Fields: ' + cf7_field_names);
 
-	$('.cf7hsfi span.mailtag').click(function(event) {
+	$('.cf7tohs span.mailtag').click(function(event) {
 
 		var range = document.createRange();
 
@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
 
 		event.preventDefault();
 
-		var parent_field = $(this).parent(".cf7hsfi_form_field_names");
+		var parent_field = $(this).parent(".cf7tohs_form_field_names");
 
 		parent_field.slideUp(150, function() {
 
@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
 
 	});
 
-	function cf7hsfi_get_cf7_fields() {
+	function cf7tohs_get_cf7_fields() {
 
 		var mail_tags = $('#wpcf7-mail span.mailtag');
 		var cf7_field_names = '';

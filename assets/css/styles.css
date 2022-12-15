@@ -1,4 +1,4 @@
-.cf7hsfi .right-arrow {
+.cf7tohs .right-arrow {
   font-size: 30px;
   line-height: 30px;
   font-family: monospace;
@@ -7,30 +7,30 @@
   /*padding: 2px 5px 0 4px;*/
   font-weight: normal;
 }
-.cf7hsfi .valign-top * {
+.cf7tohs .valign-top * {
 	vertical-align: top;
 }
-.cf7hsfi .cf7hsfi_form_field_names_wrap > .cf7hsfi_form_field_names.first_field {
+.cf7tohs .cf7tohs_form_field_names_wrap > .cf7tohs_form_field_names.first_field {
 	display: inline-block;
   border-top: none;
   margin-top: 0;
   padding-top: 0;
 }
-.cf7hsfi .cf7hsfi_form_field_names_wrap > .cf7hsfi_form_field_names {
+.cf7tohs .cf7tohs_form_field_names_wrap > .cf7tohs_form_field_names {
   display: block;
   /*border-top: 1px solid #ddd;*/
   /*margin-top: 4px;*/
   /*padding-top: 4px;*/
 }
-.cf7hsfi .cf7hsfi_form_field_names_wrap > .cf7hsfi_form_field_names:last-child {
+.cf7tohs .cf7tohs_form_field_names_wrap > .cf7tohs_form_field_names:last-child {
   /*border-bottom: 1px solid #ddd;*/
   /*padding-bottom: 4px;*/
 }
-.cf7hsfi .cf7hsfi_form_field_names_wrap > a.add_field,
-.cf7hsfi .cf7hsfi_form_field_names_wrap > .cf7hsfi_form_field_names a.button {
+.cf7tohs .cf7tohs_form_field_names_wrap > a.add_field,
+.cf7tohs .cf7tohs_form_field_names_wrap > .cf7tohs_form_field_names a.button {
   margin-top: 2px;
 }
-.cf7hsfi .description.info {
+.cf7tohs .description.info {
   border-color: #ccc;
   border-radius: 2px;
   border-style: solid;
@@ -38,35 +38,35 @@
   margin: 10px 0 0;
   padding: 3px 7px 5px;
 }
-.cf7hsfi .description.info img {
+.cf7tohs .description.info img {
   border-radius: 3px;
   box-shadow: 0 0 3px #888;
   display: block;
   margin: 8px 3px 5px;
   display: none;
 }
-.cf7hsfi .easy-autocomplete {
+.cf7tohs .easy-autocomplete {
 	display: inline-block;
 }
-.cf7hsfi .debug_log {
+.cf7tohs .debug_log {
 	display: none;
 	margin: 12px 0 0;
 }
-.cf7hsfi .cf7_field_names {
+.cf7tohs .cf7_field_names {
 	font-weight: bold;
 	padding: 8px 5px 0;
 }
-.cf7hsfi .cf7_field_names:empty {
+.cf7tohs .cf7_field_names:empty {
 	display: none;
 }
-.cf7hsfi .cf7_field_names span {
+.cf7tohs .cf7_field_names span {
 	display: inline-block;
 	font-weight: normal;
 	padding: 0 3px;
 	cursor: text;
   cursor: pointer;
 }
-.cf7hsfi .cf7_field_names span:hover {
+.cf7tohs .cf7_field_names span:hover {
 	background-color: #fff;
 }
 #hubspot-forms-integration-addon-tab > a {
@@ -75,13 +75,13 @@
   background-position: 5px center;
   padding-left: 25px !important;
 }
-.cf7hsfi .icon-arrow-right {
+.cf7tohs .icon-arrow-right {
   display: inline-block;
   font-size: 30px;
   line-height: 30px;
   font-style: normal;
 }
-.cf7hsfi .icon-arrow-right::before {
+.cf7tohs .icon-arrow-right::before {
   content: "\21D2";
   display: block;
   margin: -1px 0 0;
