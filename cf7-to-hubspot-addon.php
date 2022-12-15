@@ -1,22 +1,28 @@
 <?php
 /*
-Plugin Name: CF7 HubSpot Forms Add-on For Contact Form 7
-Plugin URI: http://ahmadkarim.com/wordpress-plugins/cf7-hubspot-forms-addon-for-contact-form-7/
-Description: This plugin enables HubSpot forms integration with Contact Form 7 forms. In order for this plugin to work <a href="http://php.net/manual/en/book.curl.php" target="_blank">cURL for PHP</a> should be enabled.
-Author: Ahmad Karim
-Version: 1.0
-Author URI: http://ahmadkarim.com/
+Plugin Name: CF7 to HubSpot Add-on
+Plugin URI: https://github.com/DieeMG/cf7-to-hubspot-add-on
+Description: This plugin enables HubSpot forms integration with Contact Form 7 forms. In order for this plugin to work <a href="http://php.net/manual/en/book.curl.php" target="_blank">cURL for PHP</a> should be enabled. This is a fork from <a href="https://wordpress.org/plugins/cf7-hubspot-forms-add-on-for-contact-form-7/">CF7 HubSpot Forms Add-on For Contact Form 7</a> plugin
+Author: devAcid
+Version: 1.0.1
+Author URI: https://devacid.xyz/
 
-PREFIX: cf7hsfi (Contact Form 7 HubSpot Forms Integration)
+PREFIX: cf7tohs (CF7 to HubSpot Add-on)
 
 */
 
 // check to make sure contact form 7 is installed and active
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
+//chech WP_DEBUG state
+$wpDebug = false;
+if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+    $wpDebug = true;
+}
+
 if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 
-	function cf7hsfi_root_url( $append = false ) {
+	function cf7tohs_root_url( $append = false ) {
 
 		$base_url = plugin_dir_url( __FILE__ );
 
@@ -24,7 +30,7 @@ if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 
 	}
 	
-	function cf7hsfi_root_dir( $append = false ) {
+	function cf7tohs_root_dir( $append = false ) {
 
 		$base_dir = plugin_dir_path( __FILE__ );
 
@@ -32,32 +38,32 @@ if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 
 	}
 
-	include_once( cf7hsfi_root_dir('inc/constants.php') );
+	include_once( cf7tohs_root_dir('inc/constants.php') );
 
-	function cf7hsfi_enqueue( $hook ) {
+	function cf7tohs_enqueue( $hook ) {
 
     if ( !strpos( $hook, 'wpcf7' ) )
     	return;
 
-    wp_enqueue_style( 'cf7hsfi-styles',
-    	cf7hsfi_root_url('assets/css/styles.css'),
+    wp_enqueue_style( 'cf7tohs-styles',
+    	cf7tohs_root_url('assets/css/styles.css'),
     	false,
-    	CF7HSFI_VERSION );
+    	cf7tohs_VERSION );
 
-		wp_enqueue_script( 'cf7hsfi-scripts',
-    	cf7hsfi_root_url('assets/js/scripts.js'),
+		wp_enqueue_script( 'cf7tohs-scripts',
+    	cf7tohs_root_url('assets/js/scripts.js'),
 			array('jquery'),
-			CF7HSFI_VERSION );
+			cf7tohs_VERSION );
 
 	}
-	add_action( 'admin_enqueue_scripts', 'cf7hsfi_enqueue' );
+	add_action( 'admin_enqueue_scripts', 'cf7tohs_enqueue' );
 
-	function cf7hsfi_admin_panel ( $panels ) {
+	function cf7tohs_admin_panel ( $panels ) {
 
 		$new_page = array(
 			'hubspot-forms-integration-addon' => array(
 				'title' => __( 'HubSpot Form Integration', 'contact-form-7' ),
-				'callback' => 'cf7hsfi_admin_panel_content'
+				'callback' => 'cf7tohs_admin_panel_content'
 			)
 		);
 		
@@ -66,22 +72,22 @@ if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 		return $panels;
 		
 	}
-	add_filter( 'wpcf7_editor_panels', 'cf7hsfi_admin_panel' );
+	add_filter( 'wpcf7_editor_panels', 'cf7tohs_admin_panel' );
 
-	function cf7hsfi_admin_panel_content( $cf7 ) {
+	function cf7tohs_admin_panel_content( $cf7 ) {
 		
 		$post_id = sanitize_text_field($_GET['post']);
 
-		$enabled = get_post_meta($post_id, "_cf7hsfi_enabled", true);
-		$portal_id = get_post_meta($post_id, "_cf7hsfi_portal_id", true);
-		$form_id = get_post_meta($post_id, "_cf7hsfi_form_id", true);
-		$form_page_url = get_post_meta($post_id, "_cf7hsfi_form_page_url", true);
-		$form_page_name = get_post_meta($post_id, "_cf7hsfi_form_page_name", true);
-		$form_fields_str = get_post_meta($post_id, "_cf7hsfi_form_fields", true);
+		$enabled = get_post_meta($post_id, "_cf7tohs_enabled", true);
+		$portal_id = get_post_meta($post_id, "_cf7tohs_portal_id", true);
+		$form_id = get_post_meta($post_id, "_cf7tohs_form_id", true);
+		$form_page_url = get_post_meta($post_id, "_cf7tohs_form_page_url", true);
+		$form_page_name = get_post_meta($post_id, "_cf7tohs_form_page_name", true);
+		$form_fields_str = get_post_meta($post_id, "_cf7tohs_form_fields", true);
 		$form_fields = $form_fields_str ? unserialize($form_fields_str) : false;
-		$debug_log = get_post_meta($post_id, "_cf7hsfi_debug_log", true);
+		$debug_log = get_post_meta($post_id, "_cf7tohs_debug_log", true);
 
-		$template = cf7hsfi_get_view_template('form-fields.tpl.php');
+		$template = cf7tohs_get_view_template('form-fields.tpl.php');
 
 		if($form_fields) {
 
@@ -143,7 +149,7 @@ if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 		$search = array_keys($search_replace);
 		$replace = array_values($search_replace);
 
-		$template = cf7hsfi_get_view_template('ui-tabs-panel.tpl.php');
+		$template = cf7tohs_get_view_template('ui-tabs-panel.tpl.php');
 
 		$admin_table_output = str_replace($search, $replace, $template);
 
@@ -151,16 +157,16 @@ if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 
 	}
 
-	function cf7hsfi_get_view_template( $template_name ) {
+	function cf7tohs_get_view_template( $template_name ) {
 
 		$template_content = false;
-		$template_path = CF7HSFI_VIEWS_DIR . $template_name;
+		$template_path = cf7tohs_VIEWS_DIR . $template_name;
 
 		if( file_exists($template_path) ) {
 
 			$search_replace = array(
 				"<?php if(!defined( 'ABSPATH')) exit; ?>" => '',
-				"{plugin_url}" => cf7hsfi_root_url(),
+				"{plugin_url}" => cf7tohs_root_url(),
 				"{site_url}" => get_site_url(),
 			);
 
@@ -175,49 +181,60 @@ if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 
 	}
 
-	function cf7hsfi_admin_save_form( $cf7 ) {
+	function cf7tohs_admin_save_form( $cf7 ) {
 		
 		$post_id = sanitize_text_field($_GET['post']);
 
 		$form_fields = array();
 
-		foreach ($_POST['cf7hsfi_hs_field'] as $key => $value) {
+		foreach ($_POST['cf7tohs_hs_field'] as $key => $value) {
 
-			if($_POST['cf7hsfi_cf7_field'][$key] == '' && $value == '') continue;
+			if($_POST['cf7tohs_cf7_field'][$key] == '' && $value == '') continue;
 
-			$form_fields[$value] = $_POST['cf7hsfi_cf7_field'][$key];
+			$form_fields[$value] = $_POST['cf7tohs_cf7_field'][$key];
 
 		}
 
-		update_post_meta($post_id, '_cf7hsfi_enabled', $_POST['cf7hsfi_enabled']);
-		update_post_meta($post_id, '_cf7hsfi_portal_id', $_POST['cf7hsfi_portal_id']);
-		update_post_meta($post_id, '_cf7hsfi_form_id', $_POST['cf7hsfi_form_id']);
-		update_post_meta($post_id, '_cf7hsfi_form_page_url', $_POST['cf7hsfi_form_page_url']);
-		update_post_meta($post_id, '_cf7hsfi_form_page_name', $_POST['cf7hsfi_form_page_name']);
-		update_post_meta($post_id, '_cf7hsfi_form_fields', serialize($form_fields));
+		update_post_meta($post_id, '_cf7tohs_enabled', $_POST['cf7tohs_enabled']);
+		update_post_meta($post_id, '_cf7tohs_portal_id', $_POST['cf7tohs_portal_id']);
+		update_post_meta($post_id, '_cf7tohs_form_id', $_POST['cf7tohs_form_id']);
+		update_post_meta($post_id, '_cf7tohs_form_page_url', $_POST['cf7tohs_form_page_url']);
+		update_post_meta($post_id, '_cf7tohs_form_page_name', $_POST['cf7tohs_form_page_name']);
+		update_post_meta($post_id, '_cf7tohs_form_fields', serialize($form_fields));
 
 	}
-	add_action('wpcf7_save_contact_form', 'cf7hsfi_admin_save_form');
+	add_action('wpcf7_save_contact_form', 'cf7tohs_admin_save_form');
 
-	function cf7hsfi_frontend_submit_form( $wpcf7_data ) {
+	function cf7tohs_frontend_submit_form( $wpcf7_data ) {
 
-		$post_id = $wpcf7_data->id;
-		$enabled = get_post_meta($post_id, "_cf7hsfi_enabled", true);
-		$portal_id = get_post_meta($post_id, "_cf7hsfi_portal_id", true);
-		$form_id = get_post_meta($post_id, "_cf7hsfi_form_id", true);
-		$form_page_url = get_post_meta($post_id, "_cf7hsfi_form_page_url", true);
-		$form_page_name = get_post_meta($post_id, "_cf7hsfi_form_page_name", true);
-		$form_fields_str = get_post_meta($post_id, "_cf7hsfi_form_fields", true);
+        if ( $wpDebug ) {
+            $post_id = $wpcf7_data->id();
+        } else {
+            $post_id = $wpcf7_data->id;
+        }
+		$enabled = get_post_meta($post_id, "_cf7tohs_enabled", true);
+		$portal_id = get_post_meta($post_id, "_cf7tohs_portal_id", true);
+		$form_id = get_post_meta($post_id, "_cf7tohs_form_id", true);
+		$form_page_url = get_post_meta($post_id, "_cf7tohs_form_page_url", true);
+		$form_page_name = get_post_meta($post_id, "_cf7tohs_form_page_name", true);
+		$form_fields_str = get_post_meta($post_id, "_cf7tohs_form_fields", true);
 		$form_fields = $form_fields_str ? unserialize($form_fields_str) : false;
 
     if( $enabled == 1 && $form_fields ) {
+            if ( $wpDebug ) {
+                $user_ip = $_SERVER["REMOTE_ADDR"];
+                $hs_context = array(
+                    "ipAddress" => $user_ip
+                );
+            } else {
+                $hs_cookie = $_COOKIE["hubspotutk"];
+                $user_ip = $_SERVER["REMOTE_ADDR"];
+                $hs_context = array(
+                    "hutk" => $hs_cookie,
+                    "ipAddress" => $user_ip
+                );
+            }
 
-			$hs_cookie = $_COOKIE["hubspotutk"];
-			$user_ip = $_SERVER["REMOTE_ADDR"];
-			$hs_context = array(
-				"hutk" => $hs_cookie,
-				"ipAddress" => $user_ip
-			);
 
 			if( !empty($form_page_url) ) $hs_context["pageUrl"] = $form_page_url;
 			if( !empty($form_page_name) ) $hs_context["pageName"] = $form_page_name;
@@ -259,11 +276,11 @@ if ( is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 				'HUBSPOT_RESPONSE' => $response
 			);
 
-			update_post_meta($post_id, '_cf7hsfi_debug_log', serialize($debug_log));
+			update_post_meta($post_id, '_cf7tohs_debug_log', serialize($debug_log));
 
     }
 
 	}
-	add_action("wpcf7_before_send_mail", "cf7hsfi_frontend_submit_form");
+	add_action("wpcf7_before_send_mail", "cf7tohs_frontend_submit_form");
 
 }
