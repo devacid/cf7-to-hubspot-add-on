@@ -1,5 +1,5 @@
 
-# CF7 to HubSpot Addon 📨
+# CF7 to HubSpot Add-on 📨
 
 This plugin integrates HubSpot forms with Contact Form 7 forms. It's a fork from this [plugin](https://wordpress.org/plugins/cf7-hubspot-forms-add-on-for-contact-form-7/)
 
@@ -29,7 +29,7 @@ Once you are in your HubSpot dashboard, navigate to Contacts > Forms. Once there
 
 ## Support 
 
-For support, email diego@devacid.com 
+For support, email soporte@devacid.xyz 
 
 
 ## License
