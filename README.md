@@ -29,7 +29,7 @@ Once you are in your HubSpot dashboard, navigate to Contacts > Forms. Once there
 
 ## Support 
 
-For support, email diego@devacid.com 
+For support, email soporte@devacid.xyz 
 
 
 ## License
