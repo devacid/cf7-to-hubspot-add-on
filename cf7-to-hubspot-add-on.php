@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: CF7 to HubSpot Add-on
-Plugin URI: https://github.com/DieeMG/cf7-to-hubspot-add-on
+Plugin URI: https://github.com/devacid/cf7-to-hubspot-add-on.git
 Description: This plugin enables HubSpot forms integration with Contact Form 7 forms. In order for this plugin to work <a href="http://php.net/manual/en/book.curl.php" target="_blank">cURL for PHP</a> should be enabled. This is a fork from <a href="https://wordpress.org/plugins/cf7-hubspot-forms-add-on-for-contact-form-7/">CF7 HubSpot Forms Add-on For Contact Form 7</a> plugin
 Author: devAcid
-Version: 1.0.1
+Version: 1.0.2
 Author URI: https://devacid.xyz/
 
 PREFIX: cf7tohs (CF7 to HubSpot Add-on)
@@ -13,6 +13,26 @@ PREFIX: cf7tohs (CF7 to HubSpot Add-on)
 
 // check to make sure contact form 7 is installed and active
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+//plugin-update-checker
+require 'plugin-update-checker/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://github.com/devacid/cf7-to-hubspot-add-on/',
+	__FILE__,
+	'cf7-to-hubspot-add-on'
+);
+
+//Set the branch that contains the stable release.
+//$myUpdateChecker->setBranch('main');
+
+//Set update by releases
+$myUpdateChecker->getVcsApi()->enableReleaseAssets();
+
+
+//Optional: If you're using a private repository, specify the access token like this:
+$myUpdateChecker->setAuthentication('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');
 
 //chech WP_DEBUG state
 $wpDebug = false;
