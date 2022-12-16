@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: CF7 to HubSpot Add-on
-Plugin URI: https://github.com/devacid/cf7-to-hubspot-add-on.git
+Plugin URI: https://github.com/devacid/cf7-to-hubspot-add-on
 Description: This plugin enables HubSpot forms integration with Contact Form 7 forms. In order for this plugin to work <a href="http://php.net/manual/en/book.curl.php" target="_blank">cURL for PHP</a> should be enabled. This is a fork from <a href="https://wordpress.org/plugins/cf7-hubspot-forms-add-on-for-contact-form-7/">CF7 HubSpot Forms Add-on For Contact Form 7</a> plugin
 Author: devAcid
 Version: 1.0.2
