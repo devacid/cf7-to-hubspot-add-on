@@ -28,10 +28,9 @@ The mandatory fields for the integration to work are **Portal ID**, **Form ID** 
 
 Once you are in your HubSpot dashboard, navigate to Contacts > Forms. Once there, either select an existing form or create a new one and navigate to the Embed section where you can find the portalid and formid. There is a screenshot in the CF7 \"HubSpot Form Integration\" section which displays a sample form settings.
 
-== Screenshots ==
-1. screenshot-1.jpg
-
 == Changelog ==
+= 1.0.2 =
+* Add Updater
 = 1.0.1 =
 * FIX:  fix the no form submission issue while in WP_DEBUG mode by [davidj288](https://github.com/ChromatixAU/plugin-cf7-hubspot-forms)
 = 1.0.0 =
